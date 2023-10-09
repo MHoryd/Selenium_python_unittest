@@ -15,48 +15,37 @@ class Main_Page():
         }
 
 
-    def elem_is_displayed(self, locator):
-        elem = self.support.wait_for_visibility_of_elem_by_XPATH(locator)
-        return elem.is_displayed()
-    
-
-    def get_elem(self,locator):
-        elem = self.support.wait_for_visibility_of_elem_by_XPATH(locator)
-        return elem
-
-
-
 
     def new_category_group_is_displayed(self):
         locator = self.locators['new_category_xpath']
-        return self.elem_is_displayed(locator)
+        return self.support.elem_is_displayed(locator)
     
     def item_in_new_category_group_is_displayed(self):
         locator = self.locators['first_product_from_new_category_xpath']
-        return self.elem_is_displayed(locator)
+        return self.support.elem_is_displayed(locator)
     
 
     def favorite_category_group_is_displayed(self):
         locator = self.locators['favorite_category_xpath']
-        return self.elem_is_displayed(locator)
+        return self.support.elem_is_displayed(locator)
     
 
     def item_in_favorite_category_group_is_displayed(self):
         locator = self.locators['first_product_from_favorite_category_xpath']
-        return self.elem_is_displayed(locator)
+        return self.support.elem_is_displayed(locator)
     
 
     def bestsellers_category_group_is_displayed(self):
         locator = self.locators['bestsellers_category_xpath']
-        return self.elem_is_displayed(locator)
+        return self.support.elem_is_displayed(locator)
     
 
     def item_in_bestsellers_category_group_is_displayed(self):
         locator = self.locators['first_product_from_bestsellers_category_xpath']
-        return self.elem_is_displayed(locator)
+        return self.support.elem_is_displayed(locator)
     
 
     def get_polo_price_from_new_category(self):
         locator = self.locators['price_of_polo_from_new_categoty_xpath']
-        elem = self.get_elem(locator)
+        elem = self.support.get_elem(locator)
         return elem.text

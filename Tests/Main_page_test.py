@@ -1,8 +1,10 @@
 from selenium import webdriver
 from Config.Test_settings import Test_settings_chrome_fabrykatestow_pl
-from Pages_objects import Header_page,Main_page, Product_page
+from Pages_objects.Header_page import Header_page
+from Pages_objects.Main_page import Main_Page
+from Pages_objects.Product_page import Product_page
 from Utilities.Support import Support
-import unittest, time
+import unittest
 
 
 class Main_page_test(unittest.TestCase):
@@ -12,9 +14,9 @@ class Main_page_test(unittest.TestCase):
         self.driver = webdriver.Chrome(service=Test_settings_chrome_fabrykatestow_pl.chrome_service, options=Test_settings_chrome_fabrykatestow_pl.chrome_options)
         self.support = Support(self.driver)
         self.url = Test_settings_chrome_fabrykatestow_pl.url
-        self.header_page_object = Header_page.Header_page(self.driver,self.support)
-        self.main_page_object = Main_page.Main_Page(self.driver,self.support)
-        self.product_page_object = Product_page.Product_page(self.driver, self.support)
+        self.header_page_object = Header_page(self.driver,self.support)
+        self.main_page_object = Main_Page(self.driver,self.support)
+        self.product_page_object = Product_page(self.driver, self.support)
         self.driver.get(self.url)
         self.driver.maximize_window()
     

@@ -45,3 +45,14 @@ class Support:
     def press_enter_at_element_found_by_xpath(self, xpath,time_to_wait=5):
         elem = WebDriverWait(driver=self.driver,timeout=time_to_wait).until(EC.visibility_of_element_located((By.XPATH, xpath)))
         elem.send_keys(Keys.ENTER)
+
+
+
+    def elem_is_displayed(self, locator):
+        elem = self.wait_for_visibility_of_elem_by_XPATH(locator)
+        return elem.is_displayed()
+    
+    
+    def get_elem(self, locator):
+        elem = self.wait_for_visibility_of_elem_by_XPATH(locator)
+        return elem
