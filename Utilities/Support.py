@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
 import uuid
 
 class Support:
@@ -53,7 +54,10 @@ class Support:
 
 
 
-
+    def select_option_in_dropdown_by_text_elem_found_by_xpath(self,xpath,text):
+        drop_elem = self.wait_for_visibility_of_elem_by_XPATH(xpath=xpath)
+        dropdown = Select(drop_elem)
+        dropdown.select_by_visible_text(text=text)
 
 
     def dismiss_initial_notice(self):
@@ -61,27 +65,51 @@ class Support:
         elem.click()
 
     def press_enter_at_element_found_by_xpath(self, xpath):
-        elem = self.wait_for_visibility_of_elem_by_XPATH(xpath)
+        elem = self.wait_for_visibility_of_elem_by_XPATH(xpath=xpath)
         elem.send_keys(Keys.ENTER)
 
 
     def click_button_found_by_xpath(self, xpath):
-        elem = self.wait_for_visibility_of_elem_by_XPATH(xpath)
+        elem = self.wait_for_visibility_of_elem_by_XPATH(xpath=xpath)
         elem.click()
 
 
-    def elem_is_displayed_found_by_xpath(self, locator):
-        elem = self.wait_for_visibility_of_elem_by_XPATH(locator)
+    def insert_text_into_input_found_by_xpath(self, xpath, text):
+        elem = self.wait_for_visibility_of_elem_by_XPATH(xpath=xpath)
+        elem.send_keys(text)
+
+    def insert_text_into_input_found_by_ID(self, ID, text):
+        elem = self.wait_for_visibility_of_elem_by_ID(ID=ID)
+        elem.send_keys(text)
+
+
+    def clear_text_in_input_by_ID(self,ID):
+        elem = self.wait_for_visibility_of_elem_by_ID(ID)
+        elem.clear()
+
+
+    def clear_text_in_input_by_xpath(self,xpath):
+        elem = self.wait_for_visibility_of_elem_by_XPATH(xpath)
+        elem.clear()  
+
+
+    def clear_text_in_input_by_ID(self,ID):
+        elem = self.wait_for_visibility_of_elem_by_ID(ID)
+        elem.clear()  
+
+
+    def elem_is_displayed_found_by_xpath(self, xpath):
+        elem = self.wait_for_visibility_of_elem_by_XPATH(xpath=xpath)
         return elem.is_displayed()
     
 
-    def elem_is_displayed_found_by_partial_link_text(self, locator):
-        elem = self.wait_for_visibility_of_elem_by_link_text(locator)
+    def elem_is_displayed_found_by_partial_link_text(self, link_text):
+        elem = self.wait_for_visibility_of_elem_by_link_text(link_text=link_text)
         return elem.is_displayed()
     
     
-    def get_elem(self, locator):
-        elem = self.wait_for_visibility_of_elem_by_XPATH(locator)
+    def get_elem(self, xpath):
+        elem = self.wait_for_visibility_of_elem_by_XPATH(xpath=xpath)
         return elem
     
 
