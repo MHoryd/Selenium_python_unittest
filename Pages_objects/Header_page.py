@@ -15,10 +15,7 @@ class Header_page():
         }
     
 
-    def elem_is_displayed(self, locator):
-        elem = self.support.wait_for_visibility_of_elem_by_XPATH(locator)
-        return elem.is_displayed()
-    
+
 
     def insert_text_into_input(self,locator,text):
         elem = self.support.wait_for_visibility_of_elem_by_XPATH(locator)
@@ -29,13 +26,10 @@ class Header_page():
         self.support.press_enter_at_element_found_by_xpath(xpath=locator)
 
 
+    def click_my_account_button(self):
+        locator = self.locators['my_account_link_xpath']
+        self.support.click_button_found_by_xpath(locator)
 
-
-
-
-    def is_main_page_displayed(self):
-        locator = self.locators["main_logo_xpath"]
-        return self.elem_is_displayed(locator)
     
 
     def insert_text_into_search_bar(self, text):

@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
+import uuid
 
 class Support:
 
@@ -42,17 +43,47 @@ class Support:
             return False
         
 
-    def press_enter_at_element_found_by_xpath(self, xpath,time_to_wait=5):
-        elem = WebDriverWait(driver=self.driver,timeout=time_to_wait).until(EC.visibility_of_element_located((By.XPATH, xpath)))
+    def wait_for_visibility_of_elem_by_link_text(self,text,time_to_wait=5):
+        try:
+            elem = WebDriverWait(driver=self.driver, timeout=time_to_wait).until(EC.visibility_of_element_located((By.LINK_TEXT,text)))
+            return elem
+        except TimeoutException:
+            return False
+
+
+
+
+
+
+
+    def dismiss_initial_notice(self):
+        elem = self.wait_for_visibility_of_elem_by_XPATH(xpath="//a[@href='#']")
+        elem.click()
+
+    def press_enter_at_element_found_by_xpath(self, xpath):
+        elem = self.wait_for_visibility_of_elem_by_XPATH(xpath)
         elem.send_keys(Keys.ENTER)
 
 
+    def click_button_found_by_xpath(self, xpath):
+        elem = self.wait_for_visibility_of_elem_by_XPATH(xpath)
+        elem.click()
 
-    def elem_is_displayed(self, locator):
+
+    def elem_is_displayed_found_by_xpath(self, locator):
         elem = self.wait_for_visibility_of_elem_by_XPATH(locator)
+        return elem.is_displayed()
+    
+
+    def elem_is_displayed_found_by_partial_link_text(self, locator):
+        elem = self.wait_for_visibility_of_elem_by_link_text(locator)
         return elem.is_displayed()
     
     
     def get_elem(self, locator):
         elem = self.wait_for_visibility_of_elem_by_XPATH(locator)
         return elem
+    
+
+    def get_random_email(self):
+        return f'{uuid.uuid4()}@test.test'

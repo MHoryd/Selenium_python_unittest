@@ -18,31 +18,31 @@ class Main_Page():
 
     def new_category_group_is_displayed(self):
         locator = self.locators['new_category_xpath']
-        return self.support.elem_is_displayed(locator)
+        return self.support.elem_is_displayed_found_by_xpath(locator)
     
     def item_in_new_category_group_is_displayed(self):
         locator = self.locators['first_product_from_new_category_xpath']
-        return self.support.elem_is_displayed(locator)
+        return self.support.elem_is_displayed_found_by_xpath(locator)
     
 
     def favorite_category_group_is_displayed(self):
         locator = self.locators['favorite_category_xpath']
-        return self.support.elem_is_displayed(locator)
+        return self.support.elem_is_displayed_found_by_xpath(locator)
     
 
     def item_in_favorite_category_group_is_displayed(self):
         locator = self.locators['first_product_from_favorite_category_xpath']
-        return self.support.elem_is_displayed(locator)
+        return self.support.elem_is_displayed_found_by_xpath(locator)
     
 
     def bestsellers_category_group_is_displayed(self):
         locator = self.locators['bestsellers_category_xpath']
-        return self.support.elem_is_displayed(locator)
+        return self.support.elem_is_displayed_found_by_xpath(locator)
     
 
     def item_in_bestsellers_category_group_is_displayed(self):
         locator = self.locators['first_product_from_bestsellers_category_xpath']
-        return self.support.elem_is_displayed(locator)
+        return self.support.elem_is_displayed_found_by_xpath(locator)
     
 
     def get_polo_price_from_new_category(self):
