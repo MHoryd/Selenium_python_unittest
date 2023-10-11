@@ -1,9 +1,11 @@
+from Utilities.Support import Support
+
 class Product_page():
 
 
-    def __init__(self, driver_object, support_object):
+    def __init__(self, driver_object):
         self.driver = driver_object
-        self.support = support_object
+        self.support = Support(self.driver)
         self.locators = {
             "product_title":"//h1[@class='product_title entry-title']"
         }

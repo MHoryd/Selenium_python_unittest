@@ -1,9 +1,11 @@
+from Utilities.Support import Support
+
 class Main_Page():
 
 
-    def __init__(self, driver_object,support_object):
+    def __init__(self, driver_object):
         self.driver = driver_object
-        self.support = support_object
+        self.support = Support(self.driver)
         self.locators = {
             "new_category_xpath":"//h2[contains(text(),'Nowe')]",
             "favorite_category_xpath":"//h2[contains(text(),'Ulubione')]",

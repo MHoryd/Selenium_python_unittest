@@ -1,9 +1,11 @@
+from Utilities.Support import Support
+
 class My_account_page():
 
 
-    def __init__(self, driver_object,support_object):
+    def __init__(self, driver_object):
         self.driver = driver_object
-        self.support = support_object
+        self.support = Support(self.driver)
         self.locators = {
             'my_account_header_xpath':"//h1[@class='entry-title']",
             'register_account_email_input_id':"reg_email",

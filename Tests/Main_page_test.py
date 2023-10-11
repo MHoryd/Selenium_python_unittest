@@ -4,6 +4,7 @@ from Pages_objects.Header_page import Header_page
 from Pages_objects.Main_page import Main_Page
 from Pages_objects.Product_page import Product_page
 from Utilities.Support import Support
+from Config.Test_data import Test_data
 import unittest
 
 
@@ -14,9 +15,9 @@ class Main_page_test(unittest.TestCase):
         self.driver = webdriver.Chrome(service=Test_settings_chrome_fabrykatestow_pl.chrome_service, options=Test_settings_chrome_fabrykatestow_pl.chrome_options)
         self.support = Support(self.driver)
         self.url = Test_settings_chrome_fabrykatestow_pl.url
-        self.header_page_object = Header_page(self.driver,self.support)
-        self.main_page_object = Main_Page(self.driver,self.support)
-        self.product_page_object = Product_page(self.driver, self.support)
+        self.header_page_object = Header_page(self.driver)
+        self.main_page_object = Main_Page(self.driver)
+        self.product_page_object = Product_page(self.driver)
         self.driver.get(self.url)
         self.driver.maximize_window()
     
@@ -41,13 +42,13 @@ class Main_page_test(unittest.TestCase):
 
 
     def test4_search_for_product_using_search_bar(self):
-        self.header_page_object.insert_text_into_search_bar("Polo")
+        self.header_page_object.insert_text_into_search_bar(Test_data.data['Main_page_article'])
         self.header_page_object.submit_search_bar_input()
-        self.assertEqual(self.product_page_object.get_product_name(),'Polo')
+        self.assertEqual(self.product_page_object.get_product_name(),Test_data.data['Main_page_article'])
 
 
     def test5_proper_price_is_displayed_for_product_in_stock(self):
-        self.assertTrue(self.main_page_object.get_polo_price_from_new_category(),'€20,00')
+        self.assertTrue(self.main_page_object.get_polo_price_from_new_category(),Test_data.data['Main_page_article_price'])
 
 
 if __name__ == '__main__':
