@@ -4,12 +4,19 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.action_chains import ActionChains
 import uuid
 
 class Support:
 
     def __init__(self, driver):
         self.driver = driver
+
+
+    def hover_over_elem_by_ID(self,ID):
+        elem = self.wait_for_visibility_of_elem_by_ID(ID=ID)
+        action = ActionChains(self.driver)
+        action.move_to_element(elem).perform()
 
 
     def wait_for_visibility_of_elem_by_XPATH(self, xpath, time_to_wait=5):

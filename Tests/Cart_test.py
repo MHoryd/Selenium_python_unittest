@@ -27,6 +27,8 @@ class Cart_test(unittest.TestCase):
         self.support.dismiss_initial_notice()
         self.header_page.click_shop_button()
         self.shop_page.click_add_beanie_to_cart()
+        self.shop_page.hover_over_cart_widget()
+        time.sleep(10)
 
 
 
