@@ -78,26 +78,70 @@ class Cart_test(unittest.TestCase):
         self.shop_page.click_add_cap_to_cart()
         self.shop_page.wait_for_products_to_be_loaded_to_cart_after_button_click()
         self.shop_page.hover_over_cart_widget()
+        self.shop_page.click_remove_cap_from_cart_in_widget()
+        self.shop_page.wait_for_cap_to_be_removed_from_widget()
+        self.assertEqual(self.shop_page.get_total_price_from_cart_widget(),Test_data.data['beanie_belt_items_in_cart_price'])
+
+
+    def test6_add_multiple_products_to_the_cart_remove_one_product_from_the_cart_page_and_check_page_details(self):
+        self.support.dismiss_initial_notice()
+        self.header_page.click_shop_button()
+        self.shop_page.click_add_beanie_to_cart()
+        self.shop_page.click_add_belt_to_cart()
+        self.shop_page.click_add_cap_to_cart()
+        self.shop_page.wait_for_products_to_be_loaded_to_cart_after_button_click()
+        self.shop_page.hover_over_cart_widget()
         self.shop_page.click_cart_page_button_from_widget()
         self.cart_page.click_remove_cap_buttom()
         self.cart_page.wait_untill_cap_will_be_removed()
         self.assertEqual(self.cart_page.get_total_price(),Test_data.data['beanie_belt_items_in_cart_price'])
 
 
-    # def test6_add_multiple_products_to_the_cart_remove_one_product_from_the_cart_page_and_check_page_details(self):
-    #     pass
+    def test7_add_product_to_the_cart_and_change_product_amount_in_cart_page(self):
+        self.support.dismiss_initial_notice()
+        self.header_page.click_shop_button()
+        self.shop_page.click_add_beanie_to_cart()
+        self.shop_page.wait_for_products_to_be_loaded_to_cart_after_button_click()
+        self.shop_page.hover_over_cart_widget()
+        self.shop_page.click_cart_page_button_from_widget()
+        self.cart_page.clear_beanie_quantity_input()
+        self.cart_page.insert_new_beanie_quantity(Test_data.data['beanie_new_quantity_for_cart_page_test'])
+        self.cart_page.update_cart()
+        self.cart_page.wait_untill_cart_is_updated()
+        self.assertEqual(self.cart_page.get_total_price(),Test_data.data['beanie_new_quantity_for_cart_page_test_expected_total_price'])
 
 
-    # def test7_add_product_to_the_cart_and_change_product_amount_in_cart_page(self):
-    #     pass    
-
-
-    # def test8_add_multiple_products_to_the_cart_remove_all_product_from_the_cart_widget(self):
-    #     pass    
+    def test8_add_multiple_products_to_the_cart_remove_all_product_from_the_cart_widget(self):
+        self.support.dismiss_initial_notice()
+        self.header_page.click_shop_button()
+        self.shop_page.click_add_beanie_to_cart()
+        self.shop_page.click_add_belt_to_cart()
+        self.shop_page.click_add_cap_to_cart()
+        self.shop_page.wait_for_products_to_be_loaded_to_cart_after_button_click()
+        self.shop_page.hover_over_cart_widget()
+        self.shop_page.click_remove_cap_from_cart_in_widget()   
+        self.shop_page.click_remove_beanie_from_cart_in_widget()
+        self.shop_page.click_remove_belt_from_cart_in_widget()
+        self.shop_page.hover_over_cart_widget()
+        self.assertTrue(self.shop_page.assess_is_cart_empty())
 
 
     # def test9_add_multiple_products_to_the_cart_remove_all_product_from_the_cart_page(self):
-    #     pass   
+    #     self.support.dismiss_initial_notice()
+    #     self.header_page.click_shop_button()
+    #     self.shop_page.click_add_beanie_to_cart()
+    #     self.shop_page.click_add_belt_to_cart()
+    #     self.shop_page.click_add_cap_to_cart()
+    #     self.shop_page.wait_for_products_to_be_loaded_to_cart_after_button_click()
+    #     self.shop_page.hover_over_cart_widget()   
+    #     self.shop_page.click_cart_page_button_from_widget()
+    #     self.cart_page.click_remove_beanie_buttom()
+    #     self.cart_page.wait_untill_cart_is_updated()
+    #     self.cart_page.click_remove_belt_buttom()
+    #     self.cart_page.wait_untill_cart_is_updated()
+    #     self.cart_page.click_remove_cap_buttom()
+    #     self.cart_page.wait_untill_cart_is_updated()
+    #     self.assertTrue(self.cart_page.assess_is_cart_empty())
 
 
     # def test10_log_in_add_product_to_the_cart_and_check_cart_page_details(self):

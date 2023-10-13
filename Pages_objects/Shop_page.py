@@ -14,7 +14,11 @@ class Shop_page():
             "cart_widget_id":"site-header-cart",
             "total_price_in_cart_widget_xpath":"//p[@class='woocommerce-mini-cart__total total']/span/bdi",
             "adding_to_cart_in_progress_xpath":"//a[@class='button product_type_simple add_to_cart_button ajax_add_to_cart loading']",
-            "link_to_cart_page_from_widget_xpath":"//div[@class='widget_shopping_cart_content']//a[@href='https://tapsshop.pl/?page_id=7']"
+            "link_to_cart_page_from_widget_xpath":"//div[@class='widget_shopping_cart_content']//a[@href='https://tapsshop.pl/?page_id=7']",
+            "remove_cap_from_cart_in_widget_xpath":"//ul[@id='site-header-cart']//a[@href='https://tapsshop.pl/?product=cap']/ancestor::li/a[@class='remove remove_from_cart_button']",
+            "remove_belt_from_cart_in_widget_xpath":"//ul[@id='site-header-cart']//a[@href='https://tapsshop.pl/?product=belt']/ancestor::li/a[@class='remove remove_from_cart_button']",
+            "remove_beanie_from_cart_in_widget_xpath":"//ul[@id='site-header-cart']//a[@href='https://tapsshop.pl/?product=beanie']/ancestor::li/a[@class='remove remove_from_cart_button']",
+            "cart_is_empty_message_xpath":"//p[contains(text(),'Brak produktów w koszyku.')]"
         }
 
     def click_add_beanie_to_cart(self):
@@ -57,3 +61,38 @@ class Shop_page():
     def click_cart_page_button_from_widget(self):
         locator = self.locators['link_to_cart_page_from_widget_xpath']
         self.support.click_button_found_by_xpath(locator)
+
+
+    def click_remove_belt_from_cart_in_widget(self):
+        locator = self.locators['remove_belt_from_cart_in_widget_xpath']
+        self.support.click_button_found_by_xpath(locator)
+
+
+    def click_remove_beanie_from_cart_in_widget(self):
+        locator = self.locators['remove_beanie_from_cart_in_widget_xpath']
+        self.support.click_button_found_by_xpath(locator)
+
+
+    def click_remove_cap_from_cart_in_widget(self):
+        locator = self.locators['remove_cap_from_cart_in_widget_xpath']
+        self.support.click_button_found_by_xpath(locator)
+
+
+    def wait_for_cap_to_be_removed_from_widget(self):
+        locator = self.locators['remove_cap_from_cart_in_widget_xpath']
+        self.support.wait_for_invisibility_of_elem_by_XPATH(locator)
+
+
+    def click_remove_belt_buttom(self):
+        locator = self.locators['remove_belt_from_cart_buttom_xpath']
+        self.support.click_button_found_by_xpath(locator)
+
+
+    def click_remove_beaniet_buttom(self):
+        locator = self.locators['remove_beanie_from_cart_buttom_xpath']
+        self.support.click_button_found_by_xpath(locator)
+
+
+    def assess_is_cart_empty(self):
+        locator = self.locators['cart_is_empty_message_xpath']
+        return self.support.elem_is_displayed_found_by_xpath(locator)
