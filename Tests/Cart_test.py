@@ -3,6 +3,7 @@ from Config.Test_settings import Test_settings_chrome_fabrykatestow_pl
 from Utilities.Support import Support
 from Pages_objects.Header_page import Header_page
 from Pages_objects.Shop_page import Shop_page
+from Pages_objects.Cart_page import Cart_page
 from Config.Test_data import Test_data
 import unittest, os, time
 
@@ -16,6 +17,7 @@ class Cart_test(unittest.TestCase):
         self.url = Test_settings_chrome_fabrykatestow_pl.url
         self.header_page = Header_page(self.driver)
         self.shop_page = Shop_page(self.driver)
+        self.cart_page = Cart_page(self.driver)
         self.driver.get(self.url)
         self.driver.maximize_window()
     
@@ -27,25 +29,59 @@ class Cart_test(unittest.TestCase):
         self.support.dismiss_initial_notice()
         self.header_page.click_shop_button()
         self.shop_page.click_add_beanie_to_cart()
+        self.assertEqual(self.shop_page.get_product_in_cart_count(),1)
         self.shop_page.hover_over_cart_widget()
-        time.sleep(10)
+        self.assertEqual(self.shop_page.get_total_price_from_cart_widget(), Test_data.data['beanie_single_item_in_cart_price'])
+        
 
 
-
-    # def test2_add_multiple_the_same_products_to_the_cart_and_check_widget_details(self):
-    #     pass
-
-
-    # def test3_add_multiple_products_to_the_cart_and_check_widget_details(self):
-    #     pass
-
-
-    # def test4_add_multiple_products_to_the_cart_and_check_cart_page_details(self):
-    #     pass
+    def test2_add_multiple_the_same_products_to_the_cart_and_check_widget_details(self):
+        self.support.dismiss_initial_notice()
+        self.header_page.click_shop_button()
+        for i in range(3):
+            self.shop_page.click_add_beanie_to_cart()
+            self.shop_page.wait_for_products_to_be_loaded_to_cart_after_button_click()
+        self.assertEqual(self.shop_page.get_product_in_cart_count(),3)
+        self.shop_page.hover_over_cart_widget()
+        self.assertEqual(self.shop_page.get_total_price_from_cart_widget(),Test_data.data['beanie_three_item_in_cart_price'])
 
 
-    # def test5_add_multiple_products_to_the_cart_remove_one_product_from_the_cart_widget_and_check_widget_details(self):
-    #     pass
+    def test3_add_multiple_products_to_the_cart_and_check_widget_details(self):
+        self.support.dismiss_initial_notice()
+        self.header_page.click_shop_button()
+        self.shop_page.click_add_beanie_to_cart()
+        self.shop_page.click_add_belt_to_cart()
+        self.shop_page.click_add_cap_to_cart()
+        self.shop_page.wait_for_products_to_be_loaded_to_cart_after_button_click()
+        self.assertEqual(self.shop_page.get_product_in_cart_count(),3)
+        self.shop_page.hover_over_cart_widget()
+        self.assertEqual(self.shop_page.get_total_price_from_cart_widget(),Test_data.data['beanie_belt_cap_items_in_cart_price'])
+
+
+    def test4_add_multiple_products_to_the_cart_and_check_cart_page_details(self):
+        self.support.dismiss_initial_notice()
+        self.header_page.click_shop_button()
+        self.shop_page.click_add_beanie_to_cart()
+        self.shop_page.click_add_belt_to_cart()
+        self.shop_page.click_add_cap_to_cart()
+        self.shop_page.wait_for_products_to_be_loaded_to_cart_after_button_click()
+        self.shop_page.hover_over_cart_widget()
+        self.shop_page.click_cart_page_button_from_widget()
+        self.assertEqual(self.cart_page.get_total_price(),Test_data.data['beanie_belt_cap_items_in_cart_price'])
+
+
+    def test5_add_multiple_products_to_the_cart_remove_one_product_from_the_cart_widget_and_check_widget_details(self):
+        self.support.dismiss_initial_notice()
+        self.header_page.click_shop_button()
+        self.shop_page.click_add_beanie_to_cart()
+        self.shop_page.click_add_belt_to_cart()
+        self.shop_page.click_add_cap_to_cart()
+        self.shop_page.wait_for_products_to_be_loaded_to_cart_after_button_click()
+        self.shop_page.hover_over_cart_widget()
+        self.shop_page.click_cart_page_button_from_widget()
+        self.cart_page.click_remove_cap_buttom()
+        self.cart_page.wait_untill_cap_will_be_removed()
+        self.assertEqual(self.cart_page.get_total_price(),Test_data.data['beanie_belt_items_in_cart_price'])
 
 
     # def test6_add_multiple_products_to_the_cart_remove_one_product_from_the_cart_page_and_check_page_details(self):

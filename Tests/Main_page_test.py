@@ -42,13 +42,13 @@ class Main_page_test(unittest.TestCase):
 
 
     def test4_search_for_product_using_search_bar(self):
-        self.header_page_object.insert_text_into_search_bar(Test_data.data['Main_page_article'])
+        self.header_page_object.insert_text_into_search_bar(Test_data.data['main_page_article'])
         self.header_page_object.submit_search_bar_input()
-        self.assertEqual(self.product_page_object.get_product_name(),Test_data.data['Main_page_article'])
+        self.assertEqual(self.product_page_object.get_product_name(),Test_data.data['main_page_article'])
 
 
     def test5_proper_price_is_displayed_for_product_in_stock(self):
-        self.assertTrue(self.main_page_object.get_polo_price_from_new_category(),Test_data.data['Main_page_article_price'])
+        self.assertTrue(self.main_page_object.get_polo_price_from_new_category(),Test_data.data['main_page_article_price'])
 
 
 if __name__ == '__main__':

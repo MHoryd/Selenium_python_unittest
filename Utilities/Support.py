@@ -5,7 +5,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.action_chains import ActionChains
-import uuid
+import uuid, re
 
 class Support:
 
@@ -122,3 +122,10 @@ class Support:
 
     def get_random_email(self):
         return f'{uuid.uuid4()}@test.test'
+    
+
+
+    def get_number_from_string(self, text):
+        match = re.search(r'\d+', text)
+        number = int(match.group())
+        return number
