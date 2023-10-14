@@ -80,3 +80,10 @@ class Cart_page():
     def assess_is_cart_empty(self):
         locator = self.locators['cart_is_empty_message_xpath']
         return self.support.elem_is_displayed_found_by_xpath(locator)
+    
+    
+    def clear_all_items_in_cart_in_cart_page(self):
+        elems = self.support.get_all_elems_in_cart_page()
+        for elem in elems:
+            elem.click()
+        self.assess_is_cart_empty()

@@ -5,7 +5,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.action_chains import ActionChains
-import uuid, re
+import uuid, re, requests
 
 class Support:
 
@@ -129,25 +129,11 @@ class Support:
         match = re.search(r'\d+', text)
         number = int(match.group())
         return number
-    
-  
-    def print_cookies(self):
-        cookies = self.driver.get_cookies()
-        print("----------------------------")
-        for i in cookies:
-            print(i)
 
+    def get_all_elems_in_cart_page(self):
+        elems = self.driver.find_elements(By.XPATH,("//a[@class='remove']"))
+        return elems
 
-    def delete_all_cart_cookies(self):
-        cookies_to_delete = ['woocommerce_cart_hash','woocommerce_items_in_cart']
-        pattern_to_match = r'^wp_woocommerce_session_.*$'
-        cookies = self.driver.get_cookies()
-        for cookie in cookies:
-            print(cookie)
-            if cookie['name'] in cookies_to_delete or re.match(pattern_to_match, cookie['name']):
-                self.driver.delete_cookie(cookie['name'])
-
-
-    def refresh_page(self):
-        self.driver.refresh()
-        print(1)
+    def get_all_elems_in_cart_widget(self):
+        elems = self.driver.find_elements(By.XPATH,("//a[@class='remove remove_from_cart_button']"))
+        return elems

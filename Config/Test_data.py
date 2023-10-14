@@ -14,5 +14,7 @@ class Test_data:
         "beanie_belt_items_in_cart_price":"€85,00",
         "beanie_belt_cap_items_in_cart_price":"€103,00",
         "beanie_new_quantity_for_cart_page_test":5,
-        "beanie_new_quantity_for_cart_page_test_expected_total_price":"€100,00"
+        "beanie_new_quantity_for_cart_page_test_expected_total_price":"€100,00",
+        "hoodie_with_logo_new_quantity_for_product_page_test":5,
+        "hoodie_with_logo_fiver_intems_in_cart_price":"€225,00"
     }
