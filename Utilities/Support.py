@@ -129,3 +129,25 @@ class Support:
         match = re.search(r'\d+', text)
         number = int(match.group())
         return number
+    
+  
+    def print_cookies(self):
+        cookies = self.driver.get_cookies()
+        print("----------------------------")
+        for i in cookies:
+            print(i)
+
+
+    def delete_all_cart_cookies(self):
+        cookies_to_delete = ['woocommerce_cart_hash','woocommerce_items_in_cart']
+        pattern_to_match = r'^wp_woocommerce_session_.*$'
+        cookies = self.driver.get_cookies()
+        for cookie in cookies:
+            print(cookie)
+            if cookie['name'] in cookies_to_delete or re.match(pattern_to_match, cookie['name']):
+                self.driver.delete_cookie(cookie['name'])
+
+
+    def refresh_page(self):
+        self.driver.refresh()
+        print(1)

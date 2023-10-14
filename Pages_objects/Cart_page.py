@@ -12,6 +12,8 @@ class Cart_page():
             "remove_belt_from_cart_buttom_xpath":"//a[@href='https://tapsshop.pl/?product=belt']/ancestor::tr//a[@class='remove']",
             "remove_beanie_from_cart_buttom_xpath":"//a[@href='https://tapsshop.pl/?product=beanie']/ancestor::tr//a[@class='remove']",
             "belt_product_page_link_xpath":"//td[@class='product-name']/a[@href='https://tapsshop.pl/?product=belt']",
+            "cap_product_page_link_xpath":"//td[@class='product-name']/a[@href='https://tapsshop.pl/?product=cap']",
+            "beanie_product_page_link_xpath":"//td[@class='product-name']/a[@href='https://tapsshop.pl/?product=beanie']",
             "beanie_quantity_input_by_xpath":"//td[@class='product-name']/a[@href='https://tapsshop.pl/?product=beanie']/ancestor::tr//input",
             "update_cart_button_xpath":"//button[@name='update_cart']",
             "cart_was_updated_allert_xpath":"//div[contains(text(),'Koszyk zaktualizowany')]",
@@ -41,7 +43,17 @@ class Cart_page():
 
 
     def wait_untill_cap_will_be_removed(self):
+        locator = self.locators['cap_product_page_link_xpath']
+        self.support.wait_for_invisibility_of_elem_by_XPATH(locator)
+
+
+    def wait_untill_belt_will_be_removed(self):
         locator = self.locators['belt_product_page_link_xpath']
+        self.support.wait_for_invisibility_of_elem_by_XPATH(locator)
+
+
+    def wait_untill_beanie_will_be_removed(self):
+        locator = self.locators['beanie_product_page_link_xpath']
         self.support.wait_for_invisibility_of_elem_by_XPATH(locator)
 
 
