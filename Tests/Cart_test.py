@@ -7,7 +7,7 @@ from Pages_objects.Cart_page import Cart_page
 from Pages_objects.My_account_page import My_account_page
 from Pages_objects.Product_page import Product_page
 from Config.Test_data import Test_data
-import unittest, os, time
+import unittest, os
 
 
 

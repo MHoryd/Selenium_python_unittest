@@ -12,6 +12,7 @@ class Header_page():
             "my_account_link_xpath":"//li[@id='menu-item-100']/a",
             "orders_link_xpath":"//li[@id='menu-item-101']/a",
             "shop_link_xpath":"//li[@id='menu-item-102']/a",
+            "order_link_xpath":"//li[@id='menu-item-101']/a",
             "search_input_xpath":"//header//input[@type='search']",
             "cart_widget_id":"site-header-cart",
             "total_price_in_cart_widget_xpath":"//p[@class='woocommerce-mini-cart__total total']/span/bdi",
@@ -36,7 +37,12 @@ class Header_page():
     def click_shop_button(self):
         locator = self.locators['shop_link_xpath']
         self.support.click_button_found_by_xpath(locator)
-    
+
+
+    def click_order_button(self):
+        locator = self.locators['order_link_xpath']
+        self.support.click_button_found_by_xpath(locator)
+
 
     def insert_text_into_search_bar(self, text):
         locator = self.locators['search_input_xpath']

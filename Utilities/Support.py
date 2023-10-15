@@ -5,7 +5,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.action_chains import ActionChains
-import uuid, re, requests
+import uuid, re
 
 class Support:
 
@@ -17,6 +17,12 @@ class Support:
         elem = self.wait_for_visibility_of_elem_by_ID(ID=ID)
         action = ActionChains(self.driver)
         action.move_to_element(elem).perform()
+
+
+    def hover_over_elem_and_click_by_ID(self,ID):
+        elem = self.wait_for_visibility_of_elem_by_ID(ID=ID)
+        action = ActionChains(self.driver)
+        action.move_to_element(elem).click(elem).click(elem).perform()     
 
 
     def wait_for_visibility_of_elem_by_XPATH(self, xpath, time_to_wait=5):
@@ -67,6 +73,12 @@ class Support:
         dropdown.select_by_visible_text(text=text)
 
 
+    def select_option_in_dropdown_by_text_elem_found_by_ID(self,ID,text):
+        drop_elem = self.wait_for_invisibility_of_elem_by_ID(ID=ID)
+        dropdown = Select(drop_elem)
+        dropdown.select_by_visible_text(text=text)
+
+
     def dismiss_initial_notice(self):
         elem = self.wait_for_visibility_of_elem_by_XPATH(xpath="//a[@href='#']")
         elem.click()
@@ -80,6 +92,10 @@ class Support:
         elem = self.wait_for_visibility_of_elem_by_XPATH(xpath=xpath)
         elem.click()
 
+
+    def click_button_found_by_ID(self, ID):
+        elem = self.wait_for_visibility_of_elem_by_ID(ID=ID)
+        elem.click()
 
     def insert_text_into_input_found_by_xpath(self, xpath, text):
         elem = self.wait_for_visibility_of_elem_by_XPATH(xpath=xpath)
@@ -123,7 +139,6 @@ class Support:
     def get_random_email(self):
         return f'{uuid.uuid4()}@test.test'
     
-
 
     def get_number_from_string(self, text):
         match = re.search(r'\d+', text)
